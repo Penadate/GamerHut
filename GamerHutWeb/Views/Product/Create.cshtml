@@ -1,0 +1,46 @@
+﻿@model CreateProductModel
+
+<form method="post" asp-route-operation="@ViewData["operation"]">
+    <input asp-for="CategoryId" type="hidden" value="@ViewData["CategoryId"]" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Add New Product</h2>
+            <hr />
+        </div>
+
+        <div asp-validation-summary="All"></div>
+
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Count"></label>
+            <input asp-for="Count" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Nickname"></label>
+            <input asp-for="Nickname" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Contact"></label>
+            <input asp-for="Contact" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Add</button>
+        <a class="btn btn-secondary" asp-controller="Product" asp-action="Index" asp-route-gameId="@ViewData["GameId"]" asp-route-categoryId="@ViewData["CategoryId"]" asp-route-operation="@ViewData["operation"]" style="width:150px">Back to List</a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

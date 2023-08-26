@@ -1,0 +1,44 @@
+﻿@model ProductModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+@if (TempData["success"] != null)
+{
+    <h2>@TempData["success"]</h2>
+}
+
+
+<a class="btn btn-secondary" asp-controller="Product" asp-action="Index" asp-route-gameId="@ViewData["GameId"]" asp-route-categoryId="@ViewData["CategoryId"]" asp-route-operation="@ViewData["operation"]" style="width:150px">Back to List</a>
+
+<div class="justify-content-center row pt-4">
+    <div class="col-6">
+        <h2>Title: @Model.Name</h2>
+    </div>
+</div>
+<div class="justify-content-center row pt-4">
+    <div class="col-6">
+        <p>Seller: @Model.Nickname</p>
+    </div>
+</div>
+<div class="justify-content-center row pt-4">
+    <div class="col-6">
+        <p>Additional Info: @Model.Contact</p>
+    </div>
+</div>
+<div class="justify-content-center row pt-4">
+    <div class="col-6">
+        <p>Price: @Model.Count x @Model.Price</p>
+    </div>
+</div>
+<div class="justify-content-center row pt-4">
+    <div class="col-6">
+        <p>Date: @Model.Date</p> 
+        <a asp-controller="Product" asp-action="Edit" asp-route-gameId="@ViewData["GameId"]" asp-route-categoryId="@ViewData["CategoryId"]" asp-route-id="@Model.Id" asp-route-operation="@ViewData["operation"]" class="btn btn-secondary">
+            <i class="bi bi-pencil"></i> Edit
+        </a>
+        <a asp-controller="Product" asp-action="Delete" asp-route-gameId="@ViewData["GameId"]" asp-route-categoryId="@ViewData["CategoryId"]" asp-route-id="@Model.Id" asp-route-operation="@ViewData["operation"]" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Delete
+        </a>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CategoryModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["success"] != null)
+{
+    <h2>@TempData["success"]</h2>
+}
+
+<a asp-controller="Game" asp-action="Index" asp-route-operation="@ViewData["operation"]" style="width:150px">Back to Games</a>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Category List</h2>
+        </div>
+    </div>
+    @if (ViewData["operation"].Equals("edit") || ViewData["operation"].Equals("sell"))
+    {
+        <a asp-controller="Category" asp-action="Create" asp-route-gameId="@ViewData["GameId"]" asp-route-operation="@ViewData["operation"]" class="btn btn-primary">
+            <i class="bi bi-plus"></i> &nbsp; Add Category
+        </a>
+    }
+</div>
+
+<div class="col-12 d-flex justify-content-center align-items-center lead">
+    @if (ViewData["operation"].Equals("edit"))
+    {
+        <table class="table table-border table-striped" stryle="width:100%">
+            <tbody>
+                @foreach (var category in Model)
+                {
+                <tr>
+                    <td>
+                        <a asp-controller="Product" asp-action="Index" asp-route-gameId="@ViewData["GameId"]" asp-route-categoryId="@category.Id" asp-route-operation="@ViewData["operation"]">
+                            @category.Name
+                        </a>
+                    </td>
+    
+                    <td>
+                            <div class="w-75 btn-group lead" role="group">
+                            <a asp-controller="Category" asp-action="Edit" asp-route-gameId="@ViewData["GameId"]" asp-route-id="@category.Id" asp-route-operation="@ViewData["operation"]" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil"></i> Edit
+                           </a>    
+
+                            <a asp-controller="Category" asp-action="Delete" asp-route-gameId="@ViewData["GameId"]" asp-route-id="@category.Id" asp-route-operation="@ViewData["operation"]" class="btn btn-primary mx-2">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="btn-group-vertical">
+            @foreach (var category in Model)
+            {
+                <div class="btn-group lead" role="group" aria-label="Basic example">
+                    <a asp-controller="Product" asp-action="Index" asp-route-gameId="@ViewData["GameId"]" asp-route-categoryId="@category.Id" asp-route-operation="@ViewData["operation"]" class="btn btn-secondary">
+                        @category.Name
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>

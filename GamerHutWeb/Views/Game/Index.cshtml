@@ -1,0 +1,84 @@
+﻿@model IEnumerable<GameModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["success"] != null)
+{
+    <h2>@TempData["success"]</h2>
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Choose a game</h2>
+        </div>
+    </div>
+    @if (ViewData["operation"].Equals("edit") || ViewData["operation"].Equals("sell"))
+    {
+        <a asp-controller="Game" asp-action="Create" asp-route-operation="@ViewData["operation"]" class="btn btn-primary">
+            <i class="bi bi-plus"></i> &nbsp; Add Game
+        </a>
+    }
+</div>
+
+<div class="justify-content-center container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            @if (ViewData["operation"].Equals("edit"))
+            {
+                <table class="table table-border table-striped" stryle="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Genre
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var game in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a asp-controller="Category" asp-action="Index" asp-route-gameId="@game.Id" asp-route-operation="@ViewData["operation"]">
+                                        @game.Name
+                                    </a>
+                                </td>
+                                <td>
+                                    @game.Genre
+                                </td>
+                                <td>
+                                    <div class="w-75 btn-group" role="group">
+                                        <a asp-controller="Game" asp-action="Edit" asp-route-id="@game.Id" asp-route-operation="@ViewData["operation"]" class="btn btn-primary mx-2">
+                                            <i class="bi bi-pencil"></i> Edit
+                                        </a>
+                                        <a asp-controller="Game" asp-action="Delete" asp-route-id="@game.Id" asp-route-operation="@ViewData["operation"]" class="btn btn-primary mx-2">
+                                            <i class="bi bi-trash"></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+            @foreach (var game in Model)
+                {
+                    <a asp-controller="Category" asp-action="Index" asp-route-gameId="@game.Id" asp-route-operation="@ViewData["operation"]" class="btn btn-outline-primary">
+                    @game.Name
+                    <div class="container">
+                        @game.Genre
+                    </div>
+                </a>
+                }
+            }
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ProductModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["success"] != null)
+{
+    <h2>@TempData["success"]</h2>
+}
+<a asp-controller="Category" asp-action="Index" asp-route-gameId="@ViewData["GameId"]" asp-route-operation="@ViewData["operation"]" style="width:150px">Back to Categories</a>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Products List</h2>
+        </div>
+    </div>
+    @if (ViewData["operation"].Equals("edit") || ViewData["operation"].Equals("sell"))
+    {
+        <a asp-controller="Product" asp-action="Create" asp-route-gameId="@ViewData["GameId"]" asp-route-categoryId="@ViewData["CategoryId"]" asp-route-operation="@ViewData["operation"]" class="btn btn-primary">
+            <i class="bi bi-plus"></i> &nbsp; Add Product
+        </a>
+    }
+</div>
+
+<div class="justify-content-center container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+    @foreach (var product in Model)
+    {
+        <div class="btn-group" role="group" aria-label="Basic example">
+                    <a asp-controller="Product" asp-action="Detail" asp-route-gameId="@ViewData["GameId"]" asp-route-categoryId="@ViewData["CategoryId"]" asp-route-id="@product.Id" asp-route-operation="@ViewData["operation"]" class="btn btn-outline-primary">
+                @product.Name
+            </a>
+        </div>
+    }
+        </div>
+    </div>
+</div>
+

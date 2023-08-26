@@ -1,0 +1,46 @@
+﻿@model UpdateProductModel
+
+<form method="post" asp-action="Edit" asp-route-gameId="@ViewData["GameId"]" asp-route-categoryId="@ViewData["CategoryId"]" asp-route-id="@ViewData["Id"]" asp-route-operation="@ViewData["operation"]">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Category</h2>
+            <hr />
+        </div>
+
+        <div asp-validation-summary="All"></div>
+
+        <div class="mb-3">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" value=""/>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Count"></label>
+            <input asp-for="Count" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Nickname">Seller</label>
+            <input asp-for="Nickname" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Contact">Additional Info</label>
+            <input asp-for="Contact" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        <a class="btn btn-secondary" asp-controller="Product" asp-action="Detail" asp-route-gameId="@ViewData["GameId"]" asp-route-categoryId="@ViewData["CategoryId"]" asp-route-id="@ViewData["Id"]" asp-route-operation="@ViewData["operation"]"  style="width:150px">Back to Detail</a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
